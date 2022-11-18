@@ -1,22 +1,12 @@
-var express = require('express');
-var app = express();
-var PORT = 3000;
+const express = require("express");
+const app = express();
+const path = require("path");
 
-// This middleware will not allow the
-// request to go beyond it
-app.use(function (req, res, next) {
-	console.log("Middleware called")
-    
-	next();
-});
-	
-// Requests will never reach this route
-app.get('/user', function (req, res) {
-	console.log("/user request called");
-	res.send('Welcome to GeeksforGeeks');
-});
+app.use('/static', express.static('public')) 
+app.use('/home', express.static('public/home.html')) 
+app.use('/another', express.static('public/another.html')) 
 
-app.listen(PORT, function(err){
-	if (err) console.log(err);
-	console.log("Server listening on PORT", PORT);
+
+app.listen(5001, () => {
+    console.log("Listening on Port 5001")
 });
